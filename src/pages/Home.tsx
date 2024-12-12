@@ -1,4 +1,3 @@
-import './Home.css'
 import { ResultsContainer, SearchContainer } from '../components'
 
 function Home() {
