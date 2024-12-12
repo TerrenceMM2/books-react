@@ -1,9 +1,7 @@
-import React from 'react'
+import { DetailsContainer } from '../components'
 
 const Details = () => {
-  return (
-    <div className="p-2">Hello from Details!</div>
-  )
+  return <DetailsContainer />
 }
 
 export default Details
