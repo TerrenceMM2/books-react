@@ -1,4 +1,6 @@
 import Button from "./Button";
-import SearchBar from "./SearchBar";
+import Input from "./Input";
+import StarInput from "./StarInput";
+import StarIcon from "./StarIcon";
 
-export { Button, SearchBar }
+export { Button, Input, StarInput, StarIcon }
