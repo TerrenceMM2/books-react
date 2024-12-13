@@ -1,18 +1,20 @@
 type Volume = {
-  id: string
-  title: string,
-  authors: string[],
-  publisher: string,
-  description: string,
-  imageLink: string,
-  infoLink: string
-}
+  id: string;
+  title: string;
+  authors: string[];
+  publisher: string;
+  description: string;
+  imageLink: string;
+  infoLink: string;
+};
 
 type Review = {
-  id: string,
-  bookId: string,
-  reviewText: string,
-  starRating: number
-}
+  id: string;
+  bookId: string;
+  reviewText: string;
+  starRating: number;
+};
 
-export type { Volume, Review }
+type MethodAction = "GET" | "POST";
+
+export type { Volume, Review, MethodAction };
