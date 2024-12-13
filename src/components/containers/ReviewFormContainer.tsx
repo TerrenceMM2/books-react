@@ -1,9 +1,9 @@
-import { ReviewForm } from "../modules"
+import { ReviewForm } from "../modules";
 
 const ReviewFormContainer = () => {
   // Call POST /review HERE
 
-  return <ReviewForm />
-}
+  return <ReviewForm />;
+};
 
-export default ReviewFormContainer
+export default ReviewFormContainer;

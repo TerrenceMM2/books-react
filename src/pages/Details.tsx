@@ -1,5 +1,5 @@
-import { DetailsContainer } from '../components'
-import { ReviewsContainer } from '../components/containers'
+import { DetailsContainer } from "../components";
+import { ReviewsContainer } from "../components/containers";
 
 const Details = () => {
   return (
@@ -7,7 +7,7 @@ const Details = () => {
       <DetailsContainer />
       <ReviewsContainer />
     </>
-  )
-}
+  );
+};
 
-export default Details
+export default Details;

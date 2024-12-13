@@ -3,4 +3,4 @@ import Input from "./Input";
 import StarInput from "./StarInput";
 import StarIcon from "./StarIcon";
 
-export { Button, Input, StarInput, StarIcon }
+export { Button, Input, StarInput, StarIcon };

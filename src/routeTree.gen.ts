@@ -8,94 +8,90 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
+import { Route as rootRoute } from "./routes/__root";
 
 // Create Virtual Routes
 
-const IndexLazyImport = createFileRoute('/')()
-const DetailsVolumeIdLazyImport = createFileRoute('/details/$volumeId')()
+const IndexLazyImport = createFileRoute("/")();
+const DetailsVolumeIdLazyImport = createFileRoute("/details/$volumeId")();
 
 // Create/Update Routes
 
 const IndexLazyRoute = IndexLazyImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+} as any).lazy(() => import("./routes/index.lazy").then((d) => d.Route));
 
 const DetailsVolumeIdLazyRoute = DetailsVolumeIdLazyImport.update({
-  id: '/details/$volumeId',
-  path: '/details/$volumeId',
+  id: "/details/$volumeId",
+  path: "/details/$volumeId",
   getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/details.$volumeId.lazy').then((d) => d.Route),
-)
+} as any).lazy(() => import("./routes/details.$volumeId.lazy").then((d) => d.Route));
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/details/$volumeId': {
-      id: '/details/$volumeId'
-      path: '/details/$volumeId'
-      fullPath: '/details/$volumeId'
-      preLoaderRoute: typeof DetailsVolumeIdLazyImport
-      parentRoute: typeof rootRoute
-    }
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/details/$volumeId": {
+      id: "/details/$volumeId";
+      path: "/details/$volumeId";
+      fullPath: "/details/$volumeId";
+      preLoaderRoute: typeof DetailsVolumeIdLazyImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexLazyRoute
-  '/details/$volumeId': typeof DetailsVolumeIdLazyRoute
+  "/": typeof IndexLazyRoute;
+  "/details/$volumeId": typeof DetailsVolumeIdLazyRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexLazyRoute
-  '/details/$volumeId': typeof DetailsVolumeIdLazyRoute
+  "/": typeof IndexLazyRoute;
+  "/details/$volumeId": typeof DetailsVolumeIdLazyRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexLazyRoute
-  '/details/$volumeId': typeof DetailsVolumeIdLazyRoute
+  __root__: typeof rootRoute;
+  "/": typeof IndexLazyRoute;
+  "/details/$volumeId": typeof DetailsVolumeIdLazyRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/details/$volumeId'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/details/$volumeId'
-  id: '__root__' | '/' | '/details/$volumeId'
-  fileRoutesById: FileRoutesById
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths: "/" | "/details/$volumeId";
+  fileRoutesByTo: FileRoutesByTo;
+  to: "/" | "/details/$volumeId";
+  id: "__root__" | "/" | "/details/$volumeId";
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute
-  DetailsVolumeIdLazyRoute: typeof DetailsVolumeIdLazyRoute
+  IndexLazyRoute: typeof IndexLazyRoute;
+  DetailsVolumeIdLazyRoute: typeof DetailsVolumeIdLazyRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   DetailsVolumeIdLazyRoute: DetailsVolumeIdLazyRoute,
-}
+};
 
-export const routeTree = rootRoute
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {

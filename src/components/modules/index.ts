@@ -4,4 +4,4 @@ import Review from "./Review";
 import ReviewForm from "./ReviewForm";
 import StarRating from "./StarRating";
 
-export { Details, Result, Review, ReviewForm, StarRating }
+export { Details, Result, Review, ReviewForm, StarRating };
