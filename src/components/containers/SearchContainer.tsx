@@ -1,17 +1,15 @@
-import React, { useState } from 'react'
-import SearchBar from '../elements/SearchBar'
+import React, { useState } from "react";
+import Input from "../elements/Input";
 
 const SearchContainer = () => {
-  const [searchTerm, setSearchTerm] = useState<string>("")
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const handleOnChange = ({ target: { value }}: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(value)
-    setSearchTerm(value)
-  }
+  const handleOnChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(value);
+    setSearchTerm(value);
+  };
 
-  return (
-    <SearchBar onChange={handleOnChange}/>
-  )
-}
+  return <Input onChange={handleOnChange} />;
+};
 
-export default SearchContainer
+export default SearchContainer;
