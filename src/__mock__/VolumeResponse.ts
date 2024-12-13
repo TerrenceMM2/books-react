@@ -1,4 +1,6 @@
-export const mockVolume = {
+import { Volume } from "../api";
+
+export const mockVolume: Volume = {
   id: "Uu3yCAAAQBAJ",
   title: "Coconut Cowboy",
   authors: ["Tim Dorsey"],
@@ -8,4 +10,4 @@ export const mockVolume = {
   infoLink: "https://play.google.com/store/books/details?id=Uu3yCAAAQBAJ&source=gbs_api"
 }
 
-export const createMockVolumeList = () =>  Array(10).fill(mockVolume).map(() => ({ ...mockVolume }));
+export const createMockVolumeList = (): Volume[] =>  Array(10).fill(mockVolume).map(() => ({ ...mockVolume }));
