@@ -8,4 +8,11 @@ type Volume = {
   infoLink: string
 }
 
-export type { Volume }
+type Review = {
+  id: string,
+  bookId: string,
+  reviewText: string,
+  starRating: number
+}
+
+export type { Volume, Review }

@@ -1,3 +1,3 @@
-import type { Volume } from "./types";
+import type { Review, Volume } from "./types";
 
-export type { Volume }
+export type { Review, Volume }
