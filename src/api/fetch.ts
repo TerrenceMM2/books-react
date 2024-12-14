@@ -9,6 +9,10 @@ const pingApiServer = async () => {
 };
 
 const getBookSearch = async (searchTerm: string) => {
+  if (!searchTerm) {
+    throw new Error("Input cannot be empty.");
+  }
+
   const result = await executeFetch<Volume[]>(`${URL}/api/search/${searchTerm}`, "GET");
 
   return result;
