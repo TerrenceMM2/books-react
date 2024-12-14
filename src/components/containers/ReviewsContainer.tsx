@@ -8,9 +8,14 @@ import { getBookReviews } from "../../api/fetch";
 import type { Review as ReviewType } from "../../api";
 
 const ReviewsContainer: FC = () => {
-  const { volumeId } = useParams({ strict: false });
+  const { volumeId = "" } = useParams({ strict: false });
 
-  const { data, isLoading, error } = useQuery({
+  const {
+    data: reviews,
+    isSuccess,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: [`${volumeId}-reviews`],
     queryFn: () => getBookReviews(volumeId),
     enabled: !!volumeId,
@@ -18,9 +23,8 @@ const ReviewsContainer: FC = () => {
 
   return (
     <>
-      {typeof data === "string"
-        ? null
-        : data?.map((review: ReviewType, index: number) => <Review key={`${review.id}-${index}`} review={review} />)}
+      {isSuccess &&
+        reviews?.map((review: ReviewType, index: number) => <Review key={`${review.id}-${index}`} review={review} />)}
       {isLoading && "...loading"}
       {error && "ERROR"}
       <ReviewFormContainer />
