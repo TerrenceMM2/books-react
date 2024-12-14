@@ -1,4 +1,4 @@
-import { MethodAction, Volume } from "./types";
+import { MethodAction, Review, Volume } from "./types";
 
 const URL = import.meta.env.VITE_BOOKS_API_SERVER;
 
@@ -18,16 +18,23 @@ const getBookSearch = async (searchTerm: string) => {
   return result;
 };
 
-const executeFetch = async <T>(url: string, method: MethodAction): Promise<T> => {
+const getBookReviews = async (volumeId: string) => {
+  const result = await executeFetch<Review[]>(`${URL}/api/reviews/${volumeId}`, "GET");
+
+  return result;
+};
+
+const executeFetch = async <T extends object | string>(url: string, method: MethodAction): Promise<T> => {
   try {
     const response = await fetch(url, { method });
+
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
 
     const contentType = response.headers.get("content-type");
-    let result;
 
+    let result;
     if (contentType?.includes("text/plain")) {
       result = await response.text();
     } else {
@@ -44,4 +51,4 @@ const executeFetch = async <T>(url: string, method: MethodAction): Promise<T> =>
   }
 };
 
-export { pingApiServer, getBookSearch };
+export { pingApiServer, getBookSearch, getBookReviews };
