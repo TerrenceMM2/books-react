@@ -7,12 +7,12 @@ interface ResultProps {
 
 const Result = ({ result: { imageLink, authors, publisher, description, id, title } }: ResultProps) => {
   return (
-    <div className="pb-4">
-      <div className="flex pb-4">
-        <img className="float-start" src={imageLink} alt={`Front cover of ${title}`} />
+    <div className="mb-4 text-left">
+      <div className="flex mb-4">
+        <img className="float-start h-full" src={imageLink} alt={`Front cover of ${title}`} />
         <div className="flex flex-col items-start pl-4">
           <Link to="/details/$volumeId" params={{ volumeId: id }}>
-            <p className="text-xl">{title}</p>
+            <p className="text-lg">{title}</p>
           </Link>
           {authors.map((author) => (
             <p className="font-bold">{author}</p>

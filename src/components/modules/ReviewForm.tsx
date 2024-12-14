@@ -28,8 +28,8 @@ const ReviewForm = () => {
   };
 
   return (
-    <form className="flex flex-col items-start pb-4">
-      <Input name="reviewText" onChange={handleOnChange} label="New Review" />
+    <form className="flex flex-col items-start mb-4">
+      <Input name="reviewText" onChange={handleOnChange} />
       <StarRating id="new-review" onChange={handleOnChange} rating={formData.starRating} disabled={false} />
       <Button label={"Submit"} onClick={handleOnSubmit} />
     </form>
