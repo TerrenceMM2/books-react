@@ -1,13 +1,20 @@
 import { useParams } from "@tanstack/react-router";
-import { createMockVolumeList } from "../../__mock__";
+import { useMutationState } from "@tanstack/react-query";
 import { Details } from "../modules";
+import { Volume } from "../../api";
 
 const DetailsContainer = () => {
   const { volumeId } = useParams({ strict: false });
 
-  const volume = createMockVolumeList().find((volume) => volume.id === volumeId)!;
+  const results = useMutationState({
+    filters: { mutationKey: ["searchResults"] },
+    select: (store) => {
+      const volumes = store.state.data as Volume[];
+      return volumes.find((volume) => volume.id === volumeId) as Volume;
+    },
+  });
 
-  return <Details volume={volume} />;
+  return <>{results ? <Details volume={results[0]} /> : "No data"}</>;
 };
 
 export default DetailsContainer;
