@@ -7,7 +7,7 @@ import { getBooksSearch } from "../../api";
 const SearchContainer = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const { mutate, error, isPending, reset } = useMutation({
-    mutationKey: [searchTerm, "results"],
+    mutationKey: ["searchResults"],
     mutationFn: (searchTerm: string) => getBooksSearch(searchTerm),
   });
 
