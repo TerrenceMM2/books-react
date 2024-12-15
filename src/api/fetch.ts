@@ -1,4 +1,4 @@
-import { MethodAction, Review, Volume } from "./types";
+import { MethodAction, NewReview, Review, Volume } from "./types";
 
 const URL = import.meta.env.VITE_BOOKS_API_SERVER;
 
@@ -13,7 +13,7 @@ const getBooksSearch = async (searchTerm: string) => {
     throw new Error("Input cannot be empty.");
   }
 
-  const result = await executeFetch<Volume[]>(`${URL}/api/search/${searchTerm}`, "GET");
+  const result = await executeFetch<Volume[], null>(`${URL}/api/search/${searchTerm}`, "GET");
 
   return result;
 };
@@ -23,20 +23,32 @@ const getBookSearch = async (volumeId: string) => {
     throw new Error("Id cannot be empty.");
   }
 
-  const result = await executeFetch<Volume>(`${URL}/api/search/volume/${volumeId}`, "GET");
+  const result = await executeFetch<Volume, null>(`${URL}/api/search/volume/${volumeId}`, "GET");
 
   return result;
 };
 
 const getBookReviews = async (volumeId: string) => {
-  const result = await executeFetch<Review[]>(`${URL}/api/reviews/${volumeId}`, "GET");
+  const result = await executeFetch<Review[], null>(`${URL}/api/reviews/${volumeId}`, "GET");
 
   return result;
 };
 
-const executeFetch = async <T extends object | string>(url: string, method: MethodAction): Promise<T> => {
+const postBookReview = async (review: NewReview) => {
+  const result = await executeFetch<Review, NewReview>(`${URL}/api/reviews`, "POST", review);
+
+  return result;
+};
+
+function executeFetch<T extends object | string>(url: string, method: MethodAction): Promise<T>;
+function executeFetch<T extends object | string, U>(url: string, method: MethodAction, body?: U): Promise<T>;
+async function executeFetch<T extends object | string, U>(url: string, method: MethodAction, body?: U): Promise<T> {
   try {
-    const response = await fetch(url, { method });
+    const fetchOptions: RequestInit = {
+      method,
+      ...(body && { body: JSON.stringify(body), headers: { "Content-Type": "application/json" } }),
+    };
+    const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -59,6 +71,6 @@ const executeFetch = async <T extends object | string>(url: string, method: Meth
 
     throw new Error("An unknown error occurred");
   }
-};
+}
 
-export { pingApiServer, getBooksSearch, getBookSearch, getBookReviews };
+export { pingApiServer, getBooksSearch, getBookSearch, getBookReviews, postBookReview };
