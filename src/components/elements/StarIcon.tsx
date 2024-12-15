@@ -11,7 +11,7 @@ const StarIcon: React.FC<StarIconProps> = ({ disabled, filled }) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={`size-6 inline ${filled ? "text-yellow-400" : "text-gray-400"} ${disabled ? "" : "hover:text-yellow-400"} cursor-pointer`}
+      className={`size-6 inline ${filled ? "text-yellow-400" : "text-gray-400"} ${disabled ? "" : "hover:text-yellow-400"} ${!disabled && `cursor-pointer`}`}
     >
       <path
         strokeLinecap="round"
