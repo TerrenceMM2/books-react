@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 import { Button, Input } from "../elements";
-import { getBookSearch } from "../../api";
+import { getBooksSearch } from "../../api";
 
 const SearchContainer = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const { mutate, error, isPending, reset } = useMutation({
     mutationKey: ["searchResults"],
-    mutationFn: (searchTerm: string) => getBookSearch(searchTerm),
+    mutationFn: (searchTerm: string) => getBooksSearch(searchTerm),
   });
 
   const handleOnChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
