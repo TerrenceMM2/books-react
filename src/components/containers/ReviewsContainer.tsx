@@ -24,6 +24,7 @@ const ReviewsContainer: FC = () => {
   return (
     <>
       {isSuccess &&
+        reviews.length > 0 &&
         reviews?.map((review: ReviewType, index: number) => <Review key={`${review.id}-${index}`} review={review} />)}
       {isLoading && "...loading"}
       {error && "ERROR"}
