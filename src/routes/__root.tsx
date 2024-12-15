@@ -4,7 +4,7 @@ import React, { Suspense } from "react";
 
 // https://tanstack.com/router/latest/docs/framework/react/devtools#only-importing-and-using-devtools-in-development
 const TanStackRouterDevtools =
-  import.meta.env.VERCEL_ENV === "production"
+  import.meta.env.NODE_ENV === "production"
     ? () => null // Render nothing in production
     : React.lazy(() =>
         // Lazy load in development
