@@ -8,12 +8,22 @@ const pingApiServer = async () => {
   return result;
 };
 
-const getBookSearch = async (searchTerm: string) => {
+const getBooksSearch = async (searchTerm: string) => {
   if (!searchTerm) {
     throw new Error("Input cannot be empty.");
   }
 
   const result = await executeFetch<Volume[]>(`${URL}/api/search/${searchTerm}`, "GET");
+
+  return result;
+};
+
+const getBookSearch = async (volumeId: string) => {
+  if (!volumeId) {
+    throw new Error("Id cannot be empty.");
+  }
+
+  const result = await executeFetch<Volume>(`${URL}/api/search/volume/${volumeId}`, "GET");
 
   return result;
 };
@@ -51,4 +61,4 @@ const executeFetch = async <T extends object | string>(url: string, method: Meth
   }
 };
 
-export { pingApiServer, getBookSearch, getBookReviews };
+export { pingApiServer, getBooksSearch, getBookSearch, getBookReviews };
