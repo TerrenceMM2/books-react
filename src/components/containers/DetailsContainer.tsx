@@ -1,10 +1,11 @@
 import { useParams } from "@tanstack/react-router";
-import { useMutationState } from "@tanstack/react-query";
+import { useMutationState, useQuery } from "@tanstack/react-query";
 import { Details } from "../modules";
-import { Volume } from "../../api";
+import { getBookSearch } from "../../api";
+import type { Volume } from "../../api";
 
 const DetailsContainer = () => {
-  const { volumeId } = useParams({ strict: false });
+  const { volumeId = "" } = useParams({ strict: false });
 
   const results = useMutationState({
     filters: { mutationKey: ["searchResults"] },
@@ -14,7 +15,13 @@ const DetailsContainer = () => {
     },
   });
 
-  return <>{results ? <Details volume={results[0]} /> : "No data"}</>;
+  const { data: volume } = useQuery({
+    queryKey: [`volume-${volumeId}`],
+    queryFn: () => getBookSearch(volumeId),
+    enabled: !!volumeId && results.length === 0,
+  });
+
+  return <>{results.length > 0 ? <Details volume={results[0]} /> : volume ? <Details volume={volume} /> : null}</>;
 };
 
 export default DetailsContainer;
