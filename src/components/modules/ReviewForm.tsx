@@ -1,37 +1,19 @@
-import { useState } from "react";
-import type { SyntheticEvent } from "react";
+import { FC, SyntheticEvent } from "react";
 import { Button, Input } from "../elements";
 import StarRating from "./StarRating";
-import { useParams } from "@tanstack/react-router";
 
-interface ReviewFormValues {
-  volumeId: string;
-  reviewText: string;
+type ReviewFormProps = {
   starRating: number;
-}
+  onChange: (e: SyntheticEvent) => void;
+  onSubmit: () => void;
+};
 
-const ReviewForm = () => {
-  const { volumeId } = useParams({ strict: false });
-  const [formData, setFormData] = useState<ReviewFormValues>({
-    volumeId: volumeId ?? "",
-    reviewText: "",
-    starRating: 0,
-  });
-
-  const handleOnChange = (e: SyntheticEvent) => {
-    const target = e.target as HTMLInputElement;
-    setFormData({ ...formData, [target.name]: target.name === "starRating" ? parseInt(target.value) : target.value });
-  };
-
-  const handleOnSubmit = () => {
-    console.log("%c SUBMIT %O", "background:seagreen;color:white;", formData);
-  };
-
+const ReviewForm: FC<ReviewFormProps> = ({ starRating, onChange, onSubmit }) => {
   return (
     <form className="flex flex-col items-start mb-4">
-      <Input name="reviewText" onChange={handleOnChange} />
-      <StarRating id="new-review" onChange={handleOnChange} rating={formData.starRating} disabled={false} />
-      <Button label={"Submit"} onClick={handleOnSubmit} />
+      <Input name="reviewText" onChange={onChange} />
+      <StarRating id="new-review" onChange={onChange} rating={starRating} disabled={false} />
+      <Button label={"Submit"} onClick={onSubmit} />
     </form>
   );
 };
