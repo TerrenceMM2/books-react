@@ -10,11 +10,13 @@ type Volume = {
 
 type Review = {
   id: string;
-  bookId: string;
+  volumeId: string;
   reviewText: string;
   starRating: number;
 };
 
+type NewReview = Omit<Review, "id">;
+
 type MethodAction = "GET" | "POST";
 
-export type { Volume, Review, MethodAction };
+export type { Volume, NewReview, Review, MethodAction };
