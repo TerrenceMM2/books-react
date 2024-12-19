@@ -1,4 +1,4 @@
-import { MethodAction, NewReview, Review, Volume } from "./types";
+import type { MethodAction, NewReview, Review, Volume } from "./types";
 
 const URL = import.meta.env.VITE_BOOKS_API_SERVER;
 
