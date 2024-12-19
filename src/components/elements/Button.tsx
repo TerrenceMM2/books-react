@@ -1,4 +1,5 @@
-import { FC, ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes } from "react";
+import type { FC } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
