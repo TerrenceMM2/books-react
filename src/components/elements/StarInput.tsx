@@ -10,18 +10,16 @@ interface StarInputProps {
 
 const StarInput: React.FC<StarInputProps> = ({ disabled, filled, onChange, value }) => {
   return (
-    <>
-      <label>
-        <input
-          className="hidden border-none p-0 bg-transparent"
-          type="radio"
-          name="starRating"
-          onChange={onChange}
-          value={value}
-        />
-        <StarIcon disabled={disabled} filled={filled} />
-      </label>
-    </>
+    <label>
+      <input
+        className="hidden border-none p-0 bg-transparent"
+        type="radio"
+        name="starRating"
+        onChange={onChange}
+        value={value}
+      />
+      <StarIcon disabled={disabled} filled={filled} />
+    </label>
   );
 };
 
