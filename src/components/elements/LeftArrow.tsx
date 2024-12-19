@@ -1,14 +1,17 @@
 import type { FC } from "react";
 
-const LeftArrow: FC = () => {
+import { ArrowProps } from "./RightArrow";
+
+const LeftArrow: FC<ArrowProps> = ({ onClick }) => {
   return (
     <svg
+      onClick={() => onClick("down")}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="size-6"
+      className="size-12"
     >
       <path
         strokeLinecap="round"
