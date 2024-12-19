@@ -18,16 +18,9 @@ const SearchContainer: FC = () => {
     setSearchTerm(value);
   };
 
-  const handleOnEnter = ({ key }: React.KeyboardEvent<HTMLInputElement>) => {
-    if (key === "Enter") {
-      reset();
-      mutate(searchTerm);
-    }
-  };
-
   return (
     <div className="mb-4 md:flex md:gap-4">
-      <Input name="search" onChange={handleOnChange} onKeyDown={handleOnEnter}>
+      <Input name="search" onChange={handleOnChange}>
         {error && <div className="text-left text-red-600">{error.message}</div>}
       </Input>
       <Button className="" disabled={isPending} label="Search" onClick={() => mutate(searchTerm)} />
