@@ -1,6 +1,7 @@
 # 📚 Book Search
 
 ![Vercel Deploy](https://deploy-badge.vercel.app/vercel/books-react-three?style=for-the-badge)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/terrencemm2/books-react?style=for-the-badge&logo=github)
 
 Live Link: [books-react-three.vercel.app](https://books-react-three.vercel.app/)
 
