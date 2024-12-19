@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { Volume } from "../../api";
+import { MissingImage } from "../elements";
 
 interface ResultProps {
   result: Volume;
@@ -9,7 +10,11 @@ const Result = ({ result: { imageLink, authors, publisher, description, id, titl
   return (
     <div className="mb-4 text-left">
       <div className="flex mb-4">
-        <img className="float-start h-full" src={imageLink} alt={`Front cover of ${title}`} />
+        {imageLink ? (
+          <img className="float-start h-full" src={imageLink} alt={`Front cover of ${title}`} />
+        ) : (
+          <MissingImage />
+        )}
         <div className="flex flex-col items-start pl-4">
           <Link to="/details/$volumeId" params={{ volumeId: id }}>
             <p className="text-lg">{title}</p>
