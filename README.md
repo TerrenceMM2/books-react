@@ -1,4 +1,4 @@
-# Book Search
+# 📚 Book Search
 
 ![Vercel Deploy](https://deploy-badge.vercel.app/vercel/books-react-three)
 
@@ -8,7 +8,7 @@ This web application allows users to search for a book using the Google Books AP
 
 ## Installation & Setup
 
-1. Clone this repository.
+1. Clone the books-react repository.
 
 ```bash
 $ git clone https://github.com/TerrenceMM2/books-react.git
