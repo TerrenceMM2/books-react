@@ -29,7 +29,9 @@ const ReviewFormContainer = () => {
 
       const previousReviews = queryClient.getQueryData([`${volumeId}-reviews`]);
 
-      queryClient.setQueryData([`${volumeId}-reviews`], (old) => [...old, newReview]);
+      queryClient.setQueryData<ReviewFormValues[]>([`${volumeId}-reviews`], (old) => {
+        return [...(old || []), newReview];
+      });
 
       return { previousReviews };
     },
