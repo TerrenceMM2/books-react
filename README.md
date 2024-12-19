@@ -1,6 +1,6 @@
 # 📚 Book Search
 
-![Vercel Deploy](https://deploy-badge.vercel.app/vercel/books-react-three)
+![Vercel Deploy](https://deploy-badge.vercel.app/vercel/books-react-three?style=for-the-badge)
 
 Live Link: [books-react-three.vercel.app](https://books-react-three.vercel.app/)
 
