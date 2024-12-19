@@ -8,12 +8,15 @@ const pingApiServer = async () => {
   return result;
 };
 
-const getBooksSearch = async (searchTerm: string) => {
+const getBooksSearch = async (searchTerm: string, page: number = 1, pageSize: number = 10) => {
   if (!searchTerm) {
     throw new Error("Input cannot be empty.");
   }
 
-  const result = await executeFetch<Volume[], null>(`${URL}/api/search/${searchTerm}`, "GET");
+  const result = await executeFetch<Volume[], null>(
+    `${URL}/api/search/?query=${searchTerm}&page=${page}&pageSize=${pageSize}`,
+    "GET",
+  );
 
   return result;
 };
