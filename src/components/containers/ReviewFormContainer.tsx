@@ -3,7 +3,7 @@ import type { SyntheticEvent } from "react";
 import { useParams } from "@tanstack/react-router";
 
 import { ReviewForm } from "../modules";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postBookReview } from "../../api";
 
 type ReviewFormValues = {
@@ -13,6 +13,7 @@ type ReviewFormValues = {
 };
 
 const ReviewFormContainer = () => {
+  const queryClient = useQueryClient();
   const { volumeId } = useParams({ strict: false });
   const [formData, setFormData] = useState<ReviewFormValues>({
     volumeId: volumeId ?? "",
@@ -23,6 +24,22 @@ const ReviewFormContainer = () => {
   const { mutate } = useMutation({
     mutationKey: [volumeId, "new-review"],
     mutationFn: (formData: ReviewFormValues) => postBookReview(formData),
+    onMutate: async (newReview) => {
+      await queryClient.cancelQueries({ queryKey: [`${volumeId}-reviews`] });
+
+      const previousReviews = queryClient.getQueryData([`${volumeId}-reviews`]);
+
+      queryClient.setQueryData([`${volumeId}-reviews`], (old) => [...old, newReview]);
+
+      return { previousReviews };
+    },
+    onError: (err, newReview, context) => {
+      queryClient.setQueryData([`${volumeId}-reviews`], context?.previousReviews);
+    },
+    // Always refetch after error or success:
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [`${volumeId}-reviews`] });
+    },
   });
 
   const handleOnChange = (e: SyntheticEvent) => {
@@ -32,6 +49,11 @@ const ReviewFormContainer = () => {
 
   const handleOnSubmit = () => {
     mutate(formData);
+    setFormData({
+      volumeId: volumeId ?? "",
+      reviewText: "",
+      starRating: 0,
+    });
   };
 
   return <ReviewForm starRating={formData.starRating} onChange={handleOnChange} onSubmit={handleOnSubmit} />;
