@@ -14,8 +14,10 @@ const Result = ({ result: { imageLink, authors, publisher, description, id, titl
           <Link to="/details/$volumeId" params={{ volumeId: id }}>
             <p className="text-lg">{title}</p>
           </Link>
-          {authors.map((author) => (
-            <p className="font-bold">{author}</p>
+          {authors.map((author, index) => (
+            <p key={`${title}-author-${index}`} className="font-bold">
+              {author}
+            </p>
           ))}
           <p>{publisher}</p>
         </div>
