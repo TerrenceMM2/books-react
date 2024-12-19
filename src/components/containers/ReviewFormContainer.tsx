@@ -35,7 +35,7 @@ const ReviewFormContainer = () => {
 
       return { previousReviews };
     },
-    onError: (err, newReview, context) => {
+    onError: (_err, _newReview, context) => {
       queryClient.setQueryData([`${volumeId}-reviews`], context?.previousReviews);
     },
     // Always refetch after error or success:
