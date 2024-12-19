@@ -1,4 +1,6 @@
+import type { FC } from "react";
 import { Link } from "@tanstack/react-router";
+
 import type { Volume } from "../../api";
 import { MissingImage } from "../elements";
 
@@ -6,7 +8,7 @@ interface ResultProps {
   result: Volume;
 }
 
-const Result = ({ result: { imageLink, authors, publisher, description, id, title } }: ResultProps) => {
+const Result: FC<ResultProps> = ({ result: { imageLink, authors, publisher, description, id, title } }) => {
   return (
     <div className="mb-4 text-left">
       <div className="flex mb-4">
